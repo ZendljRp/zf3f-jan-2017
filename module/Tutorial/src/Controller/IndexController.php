@@ -14,8 +14,8 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        $firstName = 'Doug';
-        $lastName = 'Bierer';
+        $firstName = $this->params()->fromRoute('firstName');
+        $lastName = $this->params()->fromRoute('lastName');
         return new ViewModel(['firstName' => $firstName, 'lastName' => $lastName]);
     }
 }

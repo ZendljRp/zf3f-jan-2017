@@ -15,12 +15,16 @@ return [
     'router' => [
         'routes' => [
             'tutorial' => [
-                'type' => Literal::class,
+                'type' => Segment::class,
                 'options' => [
-                    'route'    => '/tutorial',
+                    'route'    => '/tutorial[/:firstName][/:lastName]',
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
                         'action'     => 'index',
+                    ],
+                    'constraints' => [
+                        'firstName' => '[a-zA-Z0-9_-]+',    
+                        'lastName' => '[a-zA-Z0-9_-]+',    
                     ],
                 ],
             ],
@@ -32,8 +36,13 @@ return [
         ],
     ],
     'view_manager' => [
+        /*
         'template_path_stack' => [
             __DIR__ . '/../view',
+        ],
+        */
+        'template_map' => [
+            'tutorial/index/index' => __DIR__ . '/../view/tutorial/index/index.phtml',
         ],
     ],
 ];
