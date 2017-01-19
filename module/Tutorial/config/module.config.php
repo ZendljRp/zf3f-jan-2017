@@ -28,6 +28,27 @@ return [
                     ],
                 ],
             ],
+            'tutorial-google' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/google',
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action'     => 'google',
+                    ],
+                ],
+            ],
+            'tutorial-home' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/tutorial/home',
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action'     => 'home',
+                        'config'     => __FILE__
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [

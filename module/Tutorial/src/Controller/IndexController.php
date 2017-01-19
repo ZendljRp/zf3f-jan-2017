@@ -18,4 +18,17 @@ class IndexController extends AbstractActionController
         $lastName = $this->params()->fromRoute('lastName');
         return new ViewModel(['firstName' => $firstName, 'lastName' => $lastName]);
     }
+    public function googleAction()
+    {
+        // redirect to google
+        return $this->redirect()->toUrl('http://google.com/');
+    }
+    public function homeAction()
+    {
+        // redirect "home"
+        $response = $this->getResponse();
+        $response->setContent('<h1>Do Not Panic ... Everything is Under Control</h1><br>' . get_class($response));
+        return $response;
+        //return $this->redirect()->toRoute('home');
+    }
 }
