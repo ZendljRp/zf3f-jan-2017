@@ -16,7 +16,9 @@ class IndexController extends AbstractActionController
     {
         $firstName = $this->params()->fromRoute('firstName');
         $lastName = $this->params()->fromRoute('lastName');
-        return new ViewModel(['firstName' => $firstName, 'lastName' => $lastName]);
+        $viewModel = new ViewModel(['firstName' => $firstName, 'lastName' => $lastName]);
+        //$viewModel->setTerminal(true);
+        return $viewModel;
     }
     public function googleAction()
     {

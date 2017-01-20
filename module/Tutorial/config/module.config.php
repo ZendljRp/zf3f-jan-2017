@@ -49,22 +49,36 @@ return [
                     ],
                 ],
             ],
+            'tutorial-info' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'    => '/tutorial/info[/:infoKey]',
+                    'defaults' => [
+                        'controller' => Controller\InfoController::class,
+                        'action'     => 'index',
+                    ],
+                    'constraints' => [
+                        'infoKey' => '[A-Za-z]+'
+                    ]
+                ],
+            ],
         ],
     ],
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
+            Controller\InfoController::class => Controller\Factory\InfoControllerFactory::class,
         ],
     ],
     'view_manager' => [
-        /*
         'template_path_stack' => [
             __DIR__ . '/../view',
         ],
-        */
+        /*
         'template_map' => [
             'tutorial/index/index' => __DIR__ . '/../view/tutorial/index/index.phtml',
         ],
+        */
     ],
     'service_manager' => [
         'services' => [
@@ -72,6 +86,9 @@ return [
                 'google' => ['website' => 'http://google.com/', 'owner' => 'Eric Schmidt', 'notes' => 'Search'],
                 'unlikelysource' => ['website' => 'http://unlikelysource.com/', 'owner' => 'Doug Bierer', 'notes' => 'PHP Stuff'],
             ]
-        ]
+        ],
+        'factories' => [
+            'tutorial-info-list' => Model\Factory\InfoFactory::class // some factory class    
+        ],
     ]
 ];
