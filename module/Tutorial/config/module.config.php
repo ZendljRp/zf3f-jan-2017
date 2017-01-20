@@ -66,4 +66,12 @@ return [
             'tutorial/index/index' => __DIR__ . '/../view/tutorial/index/index.phtml',
         ],
     ],
+    'service_manager' => [
+        'services' => [
+            'tutorial-info-config' => [
+                'google' => ['website' => 'http://google.com/', 'owner' => 'Eric Schmidt', 'notes' => 'Search'],
+                'unlikelysource' => ['website' => 'http://unlikelysource.com/', 'owner' => 'Doug Bierer', 'notes' => 'PHP Stuff'],
+            ]
+        ]
+    ]
 ];
