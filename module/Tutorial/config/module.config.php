@@ -10,6 +10,8 @@ namespace Tutorial;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
+use Zend\Form\Element;
+use Zend\Hydrator\ArraySerializable;
 
 return [
     'router' => [
@@ -23,8 +25,8 @@ return [
                         'action'     => 'index',
                     ],
                     'constraints' => [
-                        'firstName' => '[a-zA-Z0-9_-]+',    
-                        'lastName' => '[a-zA-Z0-9_-]+',    
+                        'firstName' => '[a-zA-Z0-9_-]+',
+                        'lastName' => '[a-zA-Z0-9_-]+',
                     ],
                 ],
             ],
@@ -86,9 +88,97 @@ return [
                 'google' => ['website' => 'http://google.com/', 'owner' => 'Eric Schmidt', 'notes' => 'Search'],
                 'unlikelysource' => ['website' => 'http://unlikelysource.com/', 'owner' => 'Doug Bierer', 'notes' => 'PHP Stuff'],
             ]
+            'tutorial-form-config' => [
+                'hydrator' => ArraySerializable::class,
+                'elements' => [
+                    [
+                        'spec' => [
+                            'name' => 'name',
+                            'options' => [
+                                'label' => 'Your name',
+                            ],
+                            'type'  => 'Text',
+                        ],
+                    ],
+                    [
+                        'spec' => [
+                            'type' => Element\Email::class,
+                            'name' => 'email',
+                            'options' => [
+                                'label' => 'Your email address',
+                            ]
+                        ],
+                    ],
+                    [
+                        'spec' => [
+                            'name' => 'send',
+                            'type'  => 'Submit',
+                            'attributes' => [
+                                'value' => 'Submit',
+                            ],
+                        ],
+                    ],
+                ],
+
+                // Configuration to pass on to
+                // Zend\InputFilter\Factory::createInputFilter()
+                'input_filter' => [
+                    'name' => [
+                        [
+                            'name' => 'name',
+                            'required' => true,
+                            'filters' => [
+                                [
+                                    'name' => 'Zend\Filter\StringTrim',
+                                    'options' => [],
+                                ],
+                                [
+                                    'name' => 'Zend\Filter\StripTags',
+                                    'options' => [],
+                                ],
+                            ],
+                            'validators' => [
+                                [
+                                    'name' => 'Zend\I18n\Validator\Alnum',
+                                    'options' => [],
+                                ],
+                            ],
+                            'description' => 'Member Name',
+                            'allow_empty' => false,
+                            'continue_if_empty' => false,
+                        ],
+                    ],
+                    'email' => [
+                        [
+                            'name' => 'email',
+                            'required' => true,
+                            'filters' => [
+                                [
+                                    'name' => 'Zend\Filter\StringTrim',
+                                    'options' => [],
+                                ],
+                                [
+                                    'name' => 'Zend\Filter\StripTags',
+                                    'options' => [],
+                                ],
+                            ],
+                            'validators' => [
+                                [
+                                    'name' => 'Zend\Validator\EmailAddress',
+                                    'options' => [],
+                                ],
+                            ],
+                            'description' => 'Email Address',
+                            'allow_empty' => false,
+                            'continue_if_empty' => false,
+                        ],
+                    ],
+                ],
+            ],
         ],
         'factories' => [
-            'tutorial-info-list' => Model\Factory\InfoFactory::class // some factory class    
+            'tutorial-info-list' => Model\Factory\InfoFactory::class // some factory class
+            'tutorial-form' => Form\Factory\FormFactory::class // some factory class
         ],
     ]
 ];

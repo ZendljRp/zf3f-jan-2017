@@ -1,0 +1,10 @@
+<h1>Form</h1>
+<hr>
+<?php
+$this->form->prepare();
+echo $this->form()->openTag($this->form);
+echo $this->formCollection($this->form);
+echo $this->form()->closeTag();
+?>
+
+

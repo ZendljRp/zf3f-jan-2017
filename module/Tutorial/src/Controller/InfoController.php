@@ -13,10 +13,15 @@ use Zend\View\Model\ViewModel;
 class InfoController extends AbstractActionController
 {
     protected $infoItems;
+    protected $form;
     public function indexAction()
     {
         $infoKey = $this->params()->fromRoute('infoKey');
         return new ViewModel(['infoKey' => $infoKey, 'infoItems' => $this->getInfoItems()]);
+    }
+    public function formAction()
+    {
+        return new ViewModel(['form' => $this->form]);
     }
     public function setInfoItems($infoItems)
     {

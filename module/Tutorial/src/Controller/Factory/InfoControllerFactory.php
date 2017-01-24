@@ -11,6 +11,7 @@ class InfoControllerFactory implements FactoryInterface
     {
         $controller = new InfoController();
         $controller->setInfoItems($container->get('tutorial-info-list'));
+        $controller->setForm($container->get('tutorial-form'));
         return $controller;
     }
 }
