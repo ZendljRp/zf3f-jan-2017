@@ -12,6 +12,7 @@ use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
 use Zend\Form\Element;
 use Zend\Hydrator\ArraySerializable;
+use Zend\Form\View\Helper as FormHelper;
 
 return [
     'router' => [
@@ -64,6 +65,16 @@ return [
                     ]
                 ],
             ],
+            'tutorial-form' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'    => '/tutorial/form[/]',
+                    'defaults' => [
+                        'controller' => Controller\InfoController::class,
+                        'action'     => 'form',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
@@ -87,7 +98,7 @@ return [
             'tutorial-info-config' => [
                 'google' => ['website' => 'http://google.com/', 'owner' => 'Eric Schmidt', 'notes' => 'Search'],
                 'unlikelysource' => ['website' => 'http://unlikelysource.com/', 'owner' => 'Doug Bierer', 'notes' => 'PHP Stuff'],
-            ]
+            ],
             'tutorial-form-config' => [
                 'hydrator' => ArraySerializable::class,
                 'elements' => [
@@ -177,8 +188,42 @@ return [
             ],
         ],
         'factories' => [
-            'tutorial-info-list' => Model\Factory\InfoFactory::class // some factory class
-            'tutorial-form' => Form\Factory\FormFactory::class // some factory class
+            'tutorial-info-list' => Model\Factory\InfoFactory::class, // some factory class
+            'tutorial-form' => Form\Factory\FormFactory::class, // some factory class
         ],
-    ]
+    ],
+    'view_helpers' => [
+        'factories' => [
+            FormHelper\Form::class => InvokableFactory::class,
+            FormHelper\FormRow::class => InvokableFactory::class,
+            FormHelper\FormLabel::class => InvokableFactory::class,
+            FormHelper\FormCaptcha::class => InvokableFactory::class,
+            FormHelper\FormEmail::class => InvokableFactory::class,
+            FormHelper\FormRadio::class => InvokableFactory::class,
+            FormHelper\FormSelect::class => InvokableFactory::class,
+            FormHelper\FormSubmit::class => InvokableFactory::class,
+            FormHelper\FormText::class => InvokableFactory::class,
+            FormHelper\FormTextarea::class => InvokableFactory::class,
+            FormHelper\FormCollection::class => InvokableFactory::class,
+            FormHelper\FormElement::class => InvokableFactory::class,
+            FormHelper\FormElementErrors::class => InvokableFactory::class,
+            FormHelper\Captcha\Image::class => InvokableFactory::class,
+        ],
+        'aliases' => [
+            'form' => FormHelper\Form::class,
+            'formrow' => FormHelper\FormRow::class,
+            'formcaptcha' => FormHelper\FormCaptcha::class,
+            'formemail' => FormHelper\FormEmail::class,
+            'formradio' => FormHelper\FormRadio::class,
+            'formselect' => FormHelper\FormSelect::class,
+            'formsubmit' => FormHelper\FormSubmit::class,
+            'formtext' => FormHelper\FormText::class,
+            'formtextarea' => FormHelper\FormTextarea::class,
+            'formcollection' => FormHelper\FormCollection::class,
+            'form_label' => FormHelper\FormLabel::class,
+            'form_element' => FormHelper\FormElement::class,
+            'form_element_errors' => FormHelper\FormElementErrors::class,
+            'captcha/image' => FormHelper\Captcha\Image::class,
+        ],
+    ],
 ];

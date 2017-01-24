@@ -1,6 +1,7 @@
 <h1>Form</h1>
 <hr>
 <?php
+ini_set('display_errors', 1);
 $this->form->prepare();
 echo $this->form()->openTag($this->form);
 echo $this->formCollection($this->form);

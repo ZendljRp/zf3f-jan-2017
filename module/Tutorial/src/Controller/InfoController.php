@@ -31,4 +31,20 @@ class InfoController extends AbstractActionController
     {
         return $this->infoItems;
     }
+    /**
+     * @return the $form
+     */
+    public function getForm()
+    {
+        return $this->form;
+    }
+
+    /**
+     * @param field_type $form
+     */
+    public function setForm($form)
+    {
+        $this->form = $form;
+    }
+
 }
