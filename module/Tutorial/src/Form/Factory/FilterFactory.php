@@ -1,16 +1,14 @@
 <?php
 namespace Tutorial\Form\Factory;
 
-use Zend\Form\Factory as ZFF;
+use Zend\InputFilter\Factory as ZIF;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
-class FormFactory implements FactoryInterface
+class FilterFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $form = (new ZFF())->createForm($container->get('tutorial-form-config'));
-        $form->setInputFilter($container->get('tutorial-filter'));
-        return $form;
+        return (new ZIF())->createInputFilter($container->get('tutorial-filter-config')['input_filter']);
     }
 }

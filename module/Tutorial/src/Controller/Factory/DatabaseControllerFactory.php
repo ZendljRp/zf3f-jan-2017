@@ -1,17 +1,16 @@
 <?php
 namespace Tutorial\Controller\Factory;
 
-use Tutorial\Controller\InfoController;
+use Tutorial\Controller\DatabaseController;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
-class InfoControllerFactory implements FactoryInterface
+class DatabaseControllerFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $controller = new InfoController();
-        $controller->setInfoItems($container->get('tutorial-info-list'));
-        $controller->setForm($container->get('tutorial-form'));
+        $controller = new DatabaseController();
+        $controller->setAdapter($container->get('tutorial-adapter'));
         $controller->setTable($container->get('tutorial-table'));
         return $controller;
     }
