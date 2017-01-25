@@ -1,0 +1,60 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <?php echo $this->headTitle('ZF2 course')->setSeparator(' - ')->setAutoEscape(false) ?>
+    <!-- Latest compiled and minified CSS -->
+    <?php // setting links in a view script:
+    $this->headLink()
+        ->prependStylesheet(
+            'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
+            'screen',
+            true,
+            [
+                "integrity" => "sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u",
+                "crossorigin" => "anonymous",
+            ]
+        )
+        ->appendStylesheet(
+            'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css',
+            'screen',
+            true,
+            [
+                "integrity" => "sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp",
+                "crossorigin" => "anonymous",
+            ]
+        )
+        ->appendStylesheet('css/footer.css');
+    ?>
+    <?php echo $this->headLink() ?>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="page-header">
+        <h1>Zend Framework - Guest Book Application</h1>
+    </div>
+
+    <?php echo $this->content; ?>
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">copyright &copy; Zend Inc. <?php print date('Y'); ?></p>
+        </div>
+    </footer>
+</div>
+
+<!-- Latest compiled and minified JavaScript -->
+<?php
+$this->headScript()->appendFile(
+    'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js',
+    'text/javascript',
+    [
+        "integrity" => "sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa",
+        "crossorigin" => "anonymous",
+    ]
+);
+?>
+<?php echo $this->headScript() ?>
+</body>
+</html>

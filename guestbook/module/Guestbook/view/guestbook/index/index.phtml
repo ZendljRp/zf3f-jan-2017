@@ -1,0 +1,101 @@
+
+    <div class="row">
+
+        <div class="col-xs-12">
+            <section>
+                <h2>Create a New Entry</h2>
+                <p class="lead">Say a little something about your stay. We'd love to hear how it went.</p>
+                <?php
+                $form = $this->entryForm;
+                $form->setAttribute('action', $this->url('guestbook'));
+                $form->setAttribute('method', 'post');
+                $form->prepare();
+                ?>
+
+                <?php echo $this->form()->openTag($form) ?>
+
+                <div class="form-group">
+                    <?php $name = $form->get('name'); echo $this->formLabel($name); ?>
+                    <?php echo $this->formText($name) . $this->formElementErrors($name); ?></div>
+
+                <div class="form-group">
+                    <?php echo $this->formLabel($form->get('email')); ?>
+                    <?php echo $this->formEmail($form->get('email')) . $this->formElementErrors($form->get('email')); ?>
+                </div>
+
+                <div class="form-group">
+                    <?php echo $this->formLabel($form->get('website')); ?>
+                    <?php echo $this->formUrl($form->get('website')) . $this->formElementErrors($form->get('website')); ?>
+                </div>
+
+                <div class="form-group">
+                    <?php echo $this->formLabel($form->get('message')); ?>
+                    <?php echo $this->formTextarea(
+                        $form->get('message')) . $this->formElementErrors($form->get('message')
+                    ); ?>
+                </div>
+
+                <div class="form-group"><?php echo $this->formSubmit($form->get('submit')); ?></div>
+
+                <?php echo $this->form()->closeTag() ?>
+            </section>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2>All Guestbook Entries</h2>
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Website</th>
+                    <th>Message</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php /** @var \Guestbook\Entity\Entry $entry */ ?>
+                <?php foreach ($this->entries as $entry): ?>
+                    <?php echo $this->htmlTableRow([
+                        $entry->getName(),
+                        $entry->getEmail(),
+                        $entry->getWebsite(),
+                        $entry->getMessage()
+                    ]); ?>
+
+                    <!--<article>
+                        <h1>
+                            <?php
+/*                            $name = sprintf(
+                                "<a href='mailto:%s'>%s</a>",
+                                $this->escapeHtml($entry->getEmail()),
+                                $this->escapeHtml($entry->getName())
+                            );
+                            $website = sprintf(
+                                "<a href='%s' target='_blank'>%s</a>",
+                                $this->escapeHtml($entry->getWebsite()),
+                                $this->escapeHtml($entry->getWebsite())
+                            );
+                            printf("%s (%s)", $name, $website);
+                            */?>
+                        </h1>
+
+                        <p>
+                            <?php /*echo nl2br($this->escapeHtml($entry->getMessage())); */?>
+                        </p>
+                    </article>-->
+
+                <?php endforeach; ?>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="4">Total entries: <?php print count($this->entries); ?></td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
