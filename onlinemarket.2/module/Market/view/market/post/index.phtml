@@ -1,0 +1,22 @@
+<h1>Online Market Posting</h1>
+<hr />
+<!-- Render Market\Form\PostForm -->
+<style>
+label {
+	margin-right: 20px;
+	margin-left: 20px;
+	margin-bottom: 10px;
+}
+</style>
+<?php echo $this->headScript()->setFile('http://code.jquery.com/jquery-1.9.1.js', 'text/javascript'); ?>
+<?php echo $this->headScript()->setFile('http://code.jquery.com/ui/1.10.3/jquery-ui.js', 'text/javascript'); ?>
+<?php $this->postForm->prepare(); ?>
+<?php echo $this->form()->openTag($this->postForm); ?>
+<script type="text/javascript">
+$(document).ready(function(){
+	$( "#cityCode" ).autocomplete({"source":"\/city-lookup"});
+});
+</script>
+<?php echo $this->formcollection($this->postForm); ?>
+<?php echo $this->form()->closeTag(); ?>
+<?php Zend\Debug\Debug::dump($this->data); ?>

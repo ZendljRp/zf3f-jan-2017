@@ -1,0 +1,6 @@
+<h1>Online Market</h1>
+<hr />
+<?php if (isset($this->messages) && is_array($this->messages)) : ?>
+<?php echo $this->htmlList($this->messages, FALSE, array('style' => 'color:red;font-size:12pt')); ?>
+<?php endif; ?>
+<?php echo $this->partial('market/partials/item', array('item' => $this->item)); ?>

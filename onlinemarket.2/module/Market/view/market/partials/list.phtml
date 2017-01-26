@@ -1,0 +1,29 @@
+<?php if ($this->list instanceof Zend\Db\ResultSet\ResultSet) : ?>
+	<table style='width: 600px;'>
+	<tr>
+	<td style="width: 300px;">Item</td>
+	<td style="width: 100px;text-align: right;">Price</td>
+	<td style="width: 50px;"> </td>
+	<td style="width: 100px;">Posted</td>
+	</tr>
+	<?php while ($item = $this->list->current()) : ?>
+		<tr style="background-color:<?php echo $this->cycle(array('#F9A770', '#FAC769', '#FAAE58'))->next() ?>;">
+		<td style="width: 200px;">
+		<a href="/market/view/item/<?php echo (int) $item->listings_id; ?>"/>
+		<?php echo $this->escapehtml($item['title']); ?>
+		</a>
+		</td>
+		<td style="width: 100px;text-align: right;">
+		<?php echo (float) $item['price']; ?>
+		</td>
+		<td style="width: 50px;"> </td>
+		<td style="width: 150px;">
+		<?php echo $this->escapehtml($item['date_created']); ?>
+		</td>
+		</tr>
+		<?php $this->list->next(); ?>
+	<?php endwhile; ?>
+	</table>
+<?php else : ?>
+	<?php Zend\Debug\Debug::dump($this->list); ?>
+<?php endif; ?>

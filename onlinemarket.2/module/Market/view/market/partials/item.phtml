@@ -1,0 +1,24 @@
+<?php if ($item) : ?>
+	<h3><?php echo $this->escapehtml(ucwords($item->title)); ?></h3>
+	<div style="width: 250px; float: left;">
+	<?php if ($item->photo_filename) : ?>
+	<img src="<?php echo $item->photo_filename; ?>" width="250px" />
+	<?php else : ?>
+	No Image
+	<?php endif; ?>
+	</div>
+	<div style="width: 400px; float: left; margin: 20px;">
+	<br /><b>Contact Details:</b>
+	<br /><?php echo $this->escapeHtml($item->contact_name); ?>
+	<br /><?php echo $this->escapeHtml($item->contact_email); ?>
+	<br /><?php echo $this->escapeHtml($item->contact_phone); ?>
+	<br /><b>Posting Details:</b>
+	<br /><?php echo $this->escapeHtml($item->date_created); ?>
+	<br /><i>Price:</i> £<?php echo $this->escapeHtml($item->price); ?>
+	<br /><i>City:</i> <?php echo $this->escapeHtml($item->city); ?>,<?php echo $this->escapeHtml($item->country); ?>
+	<br /><i>Description:</i><p><?php echo $this->escapeHtml($item->description); ?></p>
+	<br /><a href="/market/delete/<?php echo $item->listings_id;?>"><span style="font-size: x-small;">DELETE</span></a>
+	</div>
+<?php else : ?>
+No Recent Posting!
+<?php endif; ?>

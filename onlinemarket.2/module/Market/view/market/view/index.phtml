@@ -1,0 +1,6 @@
+<h1>Category: <?php echo $this->escapehtml(ucfirst($this->category)); ?></h1>
+<hr />
+<?php if (isset($this->messages) && is_array($this->messages)) : ?>
+<?php echo $this->htmlList($this->messages); ?>
+<?php endif; ?>
+<?php echo $this->partial('market/partials/list', array('list' => $this->list)); ?>

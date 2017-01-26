@@ -1,10 +1,20 @@
-# ZendSkeletonApplication
+# Zend Framework Projects
 
-## Introduction
+## guestbook
 
-This is a skeleton application using the Zend Framework MVC layer and module
-systems. This application is meant to be used as a starting place for those
-looking to get their feet wet with Zend Framework.
+Rewritten version of the original Zend Framework 1 guestbook tutorial
+
+## tutorial
+
+Developed for demo purposes in Jan 2017
+
+## onlinemarket.3
+
+ZF3 version of the Online Market app used in the old ZF2 courses
+
+## onlinemarket.2
+
+ZF2 version of the Online Market app
 
 ## Installation using Composer
 
@@ -50,7 +60,7 @@ configuration in `config/autoload/development.local.php.dist`. Enabling
 development mode will copy these files to versions removing the `.dist` suffix,
 while disabling development mode will remove those copies.
 
-Development mode is automatically enabled as part of the skeleton installation process. 
+Development mode is automatically enabled as part of the skeleton installation process.
 After making changes to one of the above-mentioned `.dist` configuration files you will
 either need to disable then enable development mode for the changes to take effect,
 or manually make matching updates to the `.dist`-less copies of those files.
