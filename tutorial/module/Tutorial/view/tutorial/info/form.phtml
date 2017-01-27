@@ -1,3 +1,4 @@
+<?php ini_set('display_errors', 1); ?>
 <h1>Form</h1>
 <hr>
 <?= $this->message; ?>
@@ -27,5 +28,4 @@ echo $this->form()->openTag($this->form);
 <?= $this->form()->closeTag(); ?>
 <hr>
 <?php Zend\Debug\Debug::dump($data) ?>
-
 

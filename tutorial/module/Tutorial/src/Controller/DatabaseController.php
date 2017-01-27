@@ -58,7 +58,7 @@ class DatabaseController extends AbstractActionController
                 $message = self::ERROR_FIND;
             }
         } else {
-            return $this->redirect()->toRoute('tutorial-database-table');
+            return $this->redirect()->toRoute('tutorial/database/table');
         }
         $result = $this->table->fetchAll();
         return new ViewModel(['message' => $message, 'result' => $result]);

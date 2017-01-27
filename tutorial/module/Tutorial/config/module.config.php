@@ -19,99 +19,130 @@ return [
     'router' => [
         'routes' => [
             'tutorial' => [
-                'type' => Segment::class,
+                'type' => Literal::class,
                 'options' => [
-                    'route'    => '/tutorial[/:firstName][/:lastName]',
+                    'route'    => '/tutorial',
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
                         'action'     => 'index',
                     ],
-                    'constraints' => [
-                        'firstName' => '[a-zA-Z0-9_-]+',
-                        'lastName' => '[a-zA-Z0-9_-]+',
-                    ],
                 ],
-            ],
-            'tutorial-google' => [
-                'type' => Literal::class,
-                'options' => [
-                    'route'    => '/google',
-                    'defaults' => [
-                        'controller' => Controller\IndexController::class,
-                        'action'     => 'google',
+                'may_terminate' => false,
+                'child_routes' => [
+                    'home' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route'    => '/home',
+                            'defaults' => [
+                                'action'     => 'home',
+                                'config'     => __FILE__
+                            ],
+                        ],
                     ],
-                ],
-            ],
-            'tutorial-home' => [
-                'type' => Literal::class,
-                'options' => [
-                    'route'    => '/tutorial/home',
-                    'defaults' => [
-                        'controller' => Controller\IndexController::class,
-                        'action'     => 'home',
-                        'config'     => __FILE__
+                    'name' => [
+                        'type' => Segment::class,
+                        'options' => [
+                            'route'    => '/name[/:firstName][/:lastName]',
+                            'defaults' => [
+                                'action'     => 'index',
+                            ],
+                            'constraints' => [
+                                'firstName' => '[a-zA-Z0-9_-]+',
+                                'lastName' => '[a-zA-Z0-9_-]+',
+                            ],
+                        ],
                     ],
-                ],
-            ],
-            'tutorial-info' => [
-                'type' => Segment::class,
-                'options' => [
-                    'route'    => '/tutorial/info[/:infoKey]',
-                    'defaults' => [
-                        'controller' => Controller\InfoController::class,
-                        'action'     => 'index',
+                    'google' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route'    => '/google',
+                            'defaults' => [
+                                'action'     => 'google',
+                            ],
+                        ],
                     ],
-                    'constraints' => [
-                        'infoKey' => '[A-Za-z]+'
-                    ]
-                ],
-            ],
-            'tutorial-form' => [
-                'type' => Segment::class,
-                'options' => [
-                    'route'    => '/tutorial/form[/]',
-                    'defaults' => [
-                        'controller' => Controller\InfoController::class,
-                        'action'     => 'form',
+                    'info' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route'    => '/info',
+                            'defaults' => [
+                                'controller' => Controller\InfoController::class,
+                                'action'     => 'index',
+                            ],
+                        ],
+                        'may_terminate' => false,
+                        'child_routes' => [
+                            'key' => [
+                                'type' => Segment::class,
+                                'options' => [
+                                    'route'    => '[/:infoKey]',
+                                    'defaults' => [
+                                        'action'     => 'index',
+                                    ],
+                                    'constraints' => [
+                                        'infoKey' => '[A-Za-z]+'
+                                    ]
+                                ],
+                            ],
+                            'form' => [
+                                'type' => Segment::class,
+                                'options' => [
+                                    'route'    => '/form[/]',
+                                    'defaults' => [
+                                        'action'     => 'form',
+                                    ],
+                                ],
+                            ],
+                        ],
                     ],
-                ],
-            ],
-            'tutorial-database-query' => [
-                'type' => Segment::class,
-                'options' => [
-                    'route'    => '/tutorial/query[/:id]',
-                    'defaults' => [
-                        'controller' => Controller\DatabaseController::class,
-                        'action'     => 'query',
-                    ],
-                    'constraints' => [
-                        'id' => '[0-9]*',
-                    ],
-                ],
-            ],
-            'tutorial-database-table' => [
-                'type' => Segment::class,
-                'options' => [
-                    'route'    => '/tutorial/table[/:id]',
-                    'defaults' => [
-                        'controller' => Controller\DatabaseController::class,
-                        'action'     => 'table',
-                    ],
-                    'constraints' => [
-                        'id' => '[0-9]*',
-                    ],
-                ],
-            ],
-            'tutorial-database-delete' => [
-                'type' => Segment::class,
-                'options' => [
-                    'route'    => '/tutorial/delete[/:id]',
-                    'defaults' => [
-                        'controller' => Controller\DatabaseController::class,
-                        'action'     => 'delete',
-                    ],
-                    'constraints' => [
-                        'id' => '[0-9]*',
+                    'database' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route'    => '/db',
+                            'defaults' => [
+                                'controller' => Controller\DatabaseController::class,
+                                'action'     => 'index',
+                            ],
+                        ],
+                        'may_terminate' => false,
+                        'child_routes' => [
+                            'query' => [
+                                'type' => Segment::class,
+                                'options' => [
+                                    'route'    => '/query[/:id]',
+                                    'defaults' => [
+                                        'action'     => 'query',
+                                    ],
+                                    'constraints' => [
+                                        'id' => '[0-9]*',
+                                    ],
+                                ],
+                            ],
+                            'table' => [
+                                'type' => Segment::class,
+                                'options' => [
+                                    'route'    => '/table[/:id]',
+                                    'defaults' => [
+                                        'action'     => 'table',
+                                    ],
+                                    'constraints' => [
+                                        'id' => '[0-9]*',
+                                    ],
+                                ],
+                            ],
+                            'delete' => [
+                                'type' => Segment::class,
+                                'options' => [
+                                    'route'    => '/delete[/:id]',
+                                    'defaults' => [
+                                        'action'     => 'delete',
+                                    ],
+                                    'constraints' => [
+                                        'id' => '[0-9]*',
+                                    ],
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ],
@@ -251,7 +282,6 @@ return [
             'form' => FormHelper\Form::class,
         ],
     ],
-    /*
     'view_helpers' => [
         'factories' => [
             FormHelper\Form::class => InvokableFactory::class,
@@ -286,5 +316,4 @@ return [
             'captcha/image' => FormHelper\Captcha\Image::class,
         ],
     ],
-    */
 ];
