@@ -24,8 +24,8 @@ return [
             'model-primary-adapter-config' => [
                 'driver' => 'PDO',
                 'dsn' => 'mysql:hostname=localhost;dbname=onlinemarket',
-                'username' => 'test',
-                'password' => 'password',
+                'username' => 'vagrant',
+                'password' => 'vagrant',
             ],
         ],
     ],

@@ -19,6 +19,8 @@ class Module
 
     public function onBootstrap(MvcEvent $e)
     {
+        // this stores a reference to the Service Manager
+        // for use by any listeners defined in this class
         $this->serviceManager = $e->getApplication()->getServiceManager();
         $sem = $e->getApplication()->getEventManager()->getSharedManager();
         $sem->attach('*', self::EVENT_NOTIFY, [$this, 'sendEmail'], 99);
@@ -27,9 +29,9 @@ class Module
     {
         // init vars
         $params = $e->getParams();
-        $transKey = self::TRANSPORT_KEY_PREFIX . ($settings['transport'] ?? self::DEFAULT_TRANSPORT);
         $message = $this->serviceManager->get('notify-message');
         $settings = $this->serviceManager->get('notify-email-settings');
+        $transKey = self::TRANSPORT_KEY_PREFIX . ($settings['transport'] ?? self::DEFAULT_TRANSPORT);
         $transport = $this->serviceManager->get($transKey);
         // setup message and send
         $message->addTo($settings['to']);
@@ -67,6 +69,7 @@ class Module
             ],
             'factories' => [
                 'notify-transport-sendmail' => function ($sm) {
+                    return new SendMail();
                 },
                 'notify-transport-smtp' => function ($sm) {
                     return new Smtp(new SmtpOptions($sm->get('notify-transport-settings')['sendmail']));

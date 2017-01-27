@@ -37,6 +37,10 @@ class PostController extends AbstractActionController
             }
             $this->flash->addMessage($message);
             $notifyParams = ['subject' => $message, 'body' => __METHOD__ . PHP_EOL . date('Y-m-d H:i:s')];
+            // adding an identifier to the local controller event manager is not
+            // necessary as the shared event manager in the Notify::Module class uses
+            // "*" to avoid having specific identifiers
+            //$this->getEventManager()->addIdentifiers(['notify']);
             $this->getEventManager()->trigger(self::EVENT_NOTIFY, $this, $notifyParams);
         }
         return new ViewModel(['postForm' => $this->postForm, 'data' => $data, 'flash' => $this->flash]);

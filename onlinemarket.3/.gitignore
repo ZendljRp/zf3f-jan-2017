@@ -5,3 +5,4 @@ data/mail/*
 data/log/*
 !data/cache/.gitkeep
 public/captcha/*
+.project
